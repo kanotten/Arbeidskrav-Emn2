@@ -21,5 +21,33 @@ namespace BibliotekSystem.Models
                 _tittel = value;
             }
         }
+
+        private int _publiseringsår;
+        public int Publiseringsår
+        {
+            get => _publiseringsår;
+            set
+            {
+                if (value < 1800 || value > 2026)
+                throw new ArgumentException("Publiseringsår må være mellom 1800 - 2026");
+                _publiseringsår = value;
+            }
+        }
+
+        public bool ErUtlånt {get; protected set; }
+        
+        public int LånePeriodeDager {get; protected set; }
+
+        protected Media(string tittel, int publiseringsår)
+        {
+           
+            Tittel = tittel;
+            Publiseringsår = publiseringsår;
+            ErUtlånt = false; 
+
+             _mediaID = $"M{_idCounter:D3}";
+            _idCounter++;
+        }
+        
     }
 }
