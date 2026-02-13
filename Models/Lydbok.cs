@@ -25,7 +25,10 @@ namespace BibliotekSystem.Models
             Varighet = varighet;
             LånePeriodeDager = 7;
         }
-        
-    
+
+        public override void VisInfo()
+        {
+            Console.WriteLine($"[{MediaID}] Lydbok: '{Tittel}' av {Forfatter} - {Varighet}");
+        }
     }
 }
