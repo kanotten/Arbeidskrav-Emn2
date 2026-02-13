@@ -48,6 +48,18 @@ namespace BibliotekSystem.Models
              _mediaID = $"M{_idCounter:D3}";
             _idCounter++;
         }
+
+        public void MarkerUtlånt()
+        {
+            ErUtlånt = true;
+        }
+
+        public void MarkerTilgjengelig()
+        {
+            ErUtlånt = false;
+        }
+
+        
         
     }
 }
