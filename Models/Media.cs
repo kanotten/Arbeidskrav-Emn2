@@ -59,7 +59,7 @@ namespace BibliotekSystem.Models
             ErUtlånt = false;
         }
 
-        
+        public abstract void VisInfo();
         
     }
 }
