@@ -23,6 +23,28 @@ namespace BibliotekSystem.Models
             }
         }
 
+        public List<Media> UtlånteMedier { get; private set; }
+
+        protected Bruker(string navn, stirng epost)
+        {
+          
+            Navn = navn;
+            Epost = epost;
+            UtlånteMedier = new List<Media>();
+
+              -brukerID =$"B{_idCounter:D3}";
+            _idCounter++;
+
+        }
+
+        public voind LeggTilUtlåntMedia (Media media)
+        {
+            if (media == null)
+            throw new ArgumentException(nameof(media));
+
+            UtlånteMedier.Add(media);
+        }
+
         
     }
 }
