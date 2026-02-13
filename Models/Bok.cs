@@ -26,6 +26,12 @@ namespace BibliotekSystem.Models
             LånePeriodeDager = 14;
         }
 
+        public override void VisInfo()
+        {
+        Console.WriteLine($"[{MediaID}] Bok: '{Tittel}' av {Forfatter} ({Publiseringsår}) - {AntallSider} sider");
+        
+        }
+
         
 
     }
