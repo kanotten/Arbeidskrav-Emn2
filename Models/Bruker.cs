@@ -12,7 +12,7 @@ namespace BibliotekSystem.Models
         public string BrukerID => _brukerID;
 
         private string _navn;
-        public string _navn
+        public string Navn
         {
             get => _navn;
             set
@@ -23,27 +23,49 @@ namespace BibliotekSystem.Models
             }
         }
 
-        public List<Media> UtlånteMedier { get; private set; }
-
-        protected Bruker(string navn, stirng epost)
+        private string _epost;
+        public string Epost
         {
-          
-            Navn = navn;
-            Epost = epost;
-            UtlånteMedier = new List<Media>();
-
-              -brukerID =$"B{_idCounter:D3}";
-            _idCounter++;
-
+            get => _epost;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value) || !value.Contains("@"))
+                    throw new ArgumentException("Epost må inneholde '@'.");
+                _epost = value;
+            }
         }
 
-        public voind LeggTilUtlåntMedia (Media media)
+        public List<Media> UtlånteMedier { get; private set; }
+
+        protected Bruker(string navn, string epost)
+        {
+            Navn = navn;
+            Epost = epost;
+
+            _brukerID = $"B{_idCounter:D3}";
+            _idCounter++;
+
+            UtlånteMedier = new List<Media>();
+
+           
+        }
+
+        public void LeggTilUtlåntMedia (Media media)
         {
             if (media == null)
-            throw new ArgumentException(nameof(media));
+            throw new ArgumentNullException(nameof(media));
 
             UtlånteMedier.Add(media);
         }
+        public void FjernUtlåntMedia(Media media)
+        {
+            if (media == null)
+                throw new ArgumentNullException(nameof(media));
+
+            UtlånteMedier.Remove(media);
+        }
+
+        public abstract bool KanLåne();
 
         
     }
