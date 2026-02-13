@@ -1,4 +1,4 @@
-using system;
+using System;
 
 namespace BibliotekSystem.Models
 {
@@ -49,12 +49,12 @@ namespace BibliotekSystem.Models
             _idCounter++;
         }
 
-        public void MarkerUtlånt()
+        public void MarkerSomUtlånt()
         {
             ErUtlånt = true;
         }
 
-        public void MarkerTilgjengelig()
+        public void MarkerSomTilgjengelig()
         {
             ErUtlånt = false;
         }

@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Net.Http.Headers;
 using BibliotekSystem.Models;
 
 namespace BibliotekSystem.Services
@@ -21,47 +19,48 @@ namespace BibliotekSystem.Services
 
         public void RegistrerBruker(Bruker bruker)
         {
-            
             if (bruker == null)
-            throw new ArgumentNullException(nameof(bruker));
+                throw new ArgumentNullException(nameof(bruker));
 
-            BrukerRegister.Add(bruker); 
+            BrukerRegister.Add(bruker);
         }
 
         public void LeggTilMedia(Media media, Bruker bruker)
         {
             if (media == null)
-            throw new ArgumentNullException(nameof(media));
+                throw new ArgumentNullException(nameof(media));
 
             if (bruker == null)
-            throw new ArgumentNullException(nameof(bruker));
+                throw new ArgumentNullException(nameof(bruker));
 
             if (bruker is not Ansatt)
-            throw new InvalidOperationException("Kun ansatte kan legge til medier.");
+                throw new InvalidOperationException("Kun ansatte kan legge til medier.");
 
             MedieRegister.Add(media);
         }
 
         public void LånMedia(string mediaID, string brukerID)
         {
-            Media media = MedieRegister.Find(m => m.MediaId == mediaID);
-            Bruker bruker = BrukerRegister.Find(b => b.BrukerID = brukerID);
+            Media media = MedieRegister.Find(m => m.MediaID == mediaID);
+            Bruker bruker = BrukerRegister.Find(b => b.BrukerID == brukerID);
 
             if (media == null)
-            throw new InvalidOperationsException("Media finnes ikke.");
+                throw new InvalidOperationException("Media finnes ikke.");
+
             if (bruker == null)
-            throw new InvalidOperationsException("Bruker finnes ikke");
+                throw new InvalidOperationException("Bruker finnes ikke.");
+
             if (media.ErUtlånt)
-            throw new InvalidOperationsException("Media er allerede utlånt.");
+                throw new InvalidOperationException("Media er allerede utlånt.");
+
             if (!bruker.KanLåne())
-            throw new InvalidOperationsException("Bruker har bådd maks antall lån.");
+                throw new InvalidOperationException("Bruker har nådd maks antall lån.");
 
             Utlån utlån = new Utlån(media, bruker);
 
             UtlånsHistorikk.Add(utlån);
             bruker.LeggTilUtlåntMedia(media);
             media.MarkerSomUtlånt();
-
         }
 
         public void LeverInnMedia(string mediaID, string brukerID)
@@ -85,12 +84,12 @@ namespace BibliotekSystem.Services
             media.MarkerSomTilgjengelig();
         }
 
-        public void VisTilgjengligeMedier()
+        public void VisTilgjengeligeMedier()
         {
-            foreach(var mmedia in MedieRegister)
+            foreach (var media in MedieRegister)
             {
-                if (!MediaTypeHeaderValue.ErUtlånt)
-                Media.Visinfo();
+                if (!media.ErUtlånt)
+                    media.VisInfo();
             }
         }
 
@@ -105,7 +104,6 @@ namespace BibliotekSystem.Services
             {
                 Console.WriteLine($"[{media.MediaID}] '{media.Tittel}'");
             }
-
         }
     }
 }
