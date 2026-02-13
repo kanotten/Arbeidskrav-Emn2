@@ -20,7 +20,33 @@ namespace BibliotekSystem.Models
 
         public Utlån(Media media, Bruker bruker)
         {
+            if (media == null)
+            throw new ArgumentNullException(nameof(media));
             
+            if (bruker == null)
+            throw new ArgumentNullException(nameof(bruker));
+
+            Media = media;
+            Bruker = bruker;
+
+            UtlånsDato = DateTime.Now;
+            ForventetInnleveringsDato = UtlånsDato.AddDays(media.LånePeriodeDager);
+
+            _utlånsID = $"U{_idCounter:D3}";
+            _idCounter++;
+
+            InnlevertDato = null;
+            
+        }
+
+        public void RegistrerInnlevering()
+        {
+            InnlevertDato = DateTime.Now;
+        }
+
+        public bool ErForsinket()
+        {
+            return !InnlevertDato.HasValue && DateTime.Now > ForventetInnLeveringDato;
         }
 
     }
