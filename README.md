@@ -114,3 +114,5 @@ Etter implementert kode har Ai deretter justert koden i form av refractor for en
 C#
 
 Konsollapplikasjon
+
+Github link: [text](https://github.com/kanotten/Arbeidskrav-Emn2)
