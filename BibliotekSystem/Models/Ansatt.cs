@@ -1,21 +1,26 @@
 using System;
-using System.ComponentModel;
 
 namespace BibliotekSystem.Models
 {
+    /// <summary>
+    /// Representerer en ansatt i biblioteket.
+    /// </summary>
     public class Ansatt : Bruker
     {
-        private const int MaksAntallLån = 10;
-
+        /// <summary>
+        /// Oppretter ny ansatt.
+        /// </summary>
         public Ansatt(string navn, string epost)
-        : base(navn, epost)
+            : base(navn, epost)
         {
-            
         }
 
+        /// <summary>
+        /// Ansatte har ingen begrensning på antall lån.
+        /// </summary>
         public override bool KanLåne()
         {
-            return UtlånteMedier.Count < MaksAntallLån;
+            return true;
         }
     }
 }

@@ -2,10 +2,16 @@ using System;
 
 namespace BibliotekSystem.Models
 {
+    /// <summary>
+    /// Representerer en lydbok i biblioteket.
+    /// </summary>
     public class Lydbok : Media
     {
         private string _forfatter;
 
+        /// <summary>
+        /// Forfatter av lydboken.
+        /// </summary>
         public string Forfatter
         {
             get => _forfatter;
@@ -17,8 +23,14 @@ namespace BibliotekSystem.Models
             }
         }
 
+        /// <summary>
+        /// Varighet på lydboken.
+        /// </summary>
         public TimeSpan Varighet { get; set; }
 
+        /// <summary>
+        /// Oppretter ny lydbok.
+        /// </summary>
         public Lydbok(string tittel, int publiseringsår, string forfatter, TimeSpan varighet)
             : base(tittel, publiseringsår)
         {
@@ -27,6 +39,9 @@ namespace BibliotekSystem.Models
             LånePeriodeDager = 14;
         }
 
+        /// <summary>
+        /// Viser informasjon om lydboken.
+        /// </summary>
         public override void VisInfo()
         {
             Console.WriteLine($"[{MediaID}] Lydbok: '{Tittel}' av {Forfatter} - Varighet: {Varighet}");

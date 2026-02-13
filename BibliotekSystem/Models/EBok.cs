@@ -2,9 +2,16 @@ using System;
 
 namespace BibliotekSystem.Models
 {
+    /// <summary>
+    /// Representerer en e-bok i biblioteket.
+    /// </summary>
     public class EBok : Media
     {
         private string _forfatter;
+
+        /// <summary>
+        /// Forfatter av e-boken.
+        /// </summary>
         public string Forfatter
         {
             get => _forfatter;
@@ -16,18 +23,14 @@ namespace BibliotekSystem.Models
             }
         }
 
-        private double _filStørrelseMB;
-        public double FilStørrelseMB
-        {
-            get => _filStørrelseMB;
-            set
-            {
-                if (value <= 0)
-                    throw new ArgumentException("Filstørrelse må være større enn 0.");
-                _filStørrelseMB = value;
-            }
-        }
+        /// <summary>
+        /// Filstørrelse i MB.
+        /// </summary>
+        public double FilStørrelseMB { get; set; }
 
+        /// <summary>
+        /// Oppretter ny e-bok.
+        /// </summary>
         public EBok(string tittel, int publiseringsår, string forfatter, double filStørrelseMB)
             : base(tittel, publiseringsår)
         {
@@ -36,9 +39,12 @@ namespace BibliotekSystem.Models
             LånePeriodeDager = 21;
         }
 
+        /// <summary>
+        /// Viser informasjon om e-boken.
+        /// </summary>
         public override void VisInfo()
         {
-            Console.WriteLine($"[E-BOK] {MediaID} - {Tittel} ({Publiseringsår}) - {Forfatter} - {FilStørrelseMB} MB");
+            Console.WriteLine($"[{MediaID}] E-Bok: '{Tittel}' av {Forfatter} ({Publiseringsår}) - {FilStørrelseMB} MB");
         }
     }
 }
