@@ -17,6 +17,16 @@ namespace BibliotekSystem.Models
         }
 
         public int AntallSider { get; set; }
+
+        public Bok(string tittel, int publiseringsår, string forfatter int antallSider)
+        : base(tittel, publiseringsår)
+        {
+            Forfatter = forfatter;
+            AntallSider = antallSider;
+            LånePeriodeDager = 14;
+        }
+
         
+
     }
 }
